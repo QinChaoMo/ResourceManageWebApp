@@ -1,0 +1,12 @@
+html,
+body {
+  margin: auto;
+  padding: auto;
+  height: 100%;
+}
+
+:global(#app) {
+  margin: auto;
+  padding: auto;
+  height: 100%;
+}
