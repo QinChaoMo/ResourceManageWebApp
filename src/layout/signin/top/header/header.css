@@ -1,0 +1,11 @@
+:local(.header) {
+  padding-top: 10%;
+}
+
+:local(.headerSpan) {
+  font-size: 2em;
+}
+
+:local(.logo) {
+  padding-bottom: 12px;
+}

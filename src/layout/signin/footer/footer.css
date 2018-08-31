@@ -1,0 +1,6 @@
+:local(.footer) {
+  position: fixed;
+  bottom: 5px;
+  text-align: center;
+  width: 100%;
+}

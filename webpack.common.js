@@ -10,6 +10,12 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
@@ -20,8 +26,6 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              // you can specify a publicPath here
-              // by default it use publicPath in webpackOptions.output
               publicPath: '../',
             },
           },
@@ -29,10 +33,16 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIdentName: '[name]__[hash:base64:5]',
+              localIdentName: '[name]__[local]--[hash:base64:5]',
             },
           },
         ],
+        exclude: [/node_modules/],
+      },
+      {
+        test: /\.css$/,
+        include: [/node_modules/],
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

@@ -1,13 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import layout from './layout/layout';
+import AppLayout from './layout/AppLayout';
+
+const { Main, SignIn } = AppLayout;
 
 function AppRouter() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/signin" component={layout.SignIn} />
-        <Route path="/" component={layout.Main} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/" component={Main} />
       </Switch>
     </BrowserRouter>
   );

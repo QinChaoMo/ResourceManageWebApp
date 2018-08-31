@@ -1,0 +1,22 @@
+# build files
+dist/*
+node_modules/*
+
+# static resource
+asset/*
+*.svg
+
+# html css
+*.html
+*.css
+
+# package manage
+package.json
+*.lock
+
+# git files
+*.MD
+LICENSE
+
+#log
+*.log
