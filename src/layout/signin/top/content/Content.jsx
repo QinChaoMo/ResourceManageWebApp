@@ -13,9 +13,6 @@ function Content() {
         <TabPane tab="账号登陆" key="1">
           <WrappedNormalLoginForm />
         </TabPane>
-        <TabPane tab="手机登陆" key="2">
-          还没做...orz
-        </TabPane>
       </Tabs>
     </div>
   );
