@@ -1,6 +1,10 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox, Tabs } from 'antd';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { observer } from 'mobx-react';
+
 import style from './content.css';
 
 const FormItem = Form.Item;
@@ -18,6 +22,7 @@ function Content() {
   );
 }
 
+@observer
 class NormalLoginForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
@@ -25,6 +30,13 @@ class NormalLoginForm extends React.Component {
     form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        axios
+          .post('/signin', {
+            name: values.userName,
+            password: values.password,
+          })
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
       }
     });
   };
@@ -36,7 +48,7 @@ class NormalLoginForm extends React.Component {
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
           {getFieldDecorator('userName', {
-            rules: [{ required: true, message: 'Please input your username!' }],
+            rules: [{ required: true, message: '请输入用户名!' }],
           })(
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -46,7 +58,7 @@ class NormalLoginForm extends React.Component {
         </FormItem>
         <FormItem>
           {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please input your Password!' }],
+            rules: [{ required: true, message: '请输入密码!' }],
           })(
             <Input
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -56,14 +68,14 @@ class NormalLoginForm extends React.Component {
           )}
         </FormItem>
         <div className={style.remember}>
-          <FormItem>
+          <FormItem className="fuckform">
             {getFieldDecorator('remember', {
               valuePropName: 'checked',
               initialValue: true,
             })(<Checkbox>记住我</Checkbox>)}
-            <a className="login-form-forgot" href="/signin">
+            <Link to="/signin" className={style.loginFormForgot}>
               忘记密码?
-            </a>
+            </Link>
           </FormItem>
         </div>
 

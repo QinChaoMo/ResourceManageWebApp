@@ -1,8 +1,11 @@
-:local(.content) {
+.content {
   margin: 0 35%;
 }
 
-:local(.remember) {
+.remember {
   text-align: left;
 }
 
+.remember a {
+  float: right;
+}

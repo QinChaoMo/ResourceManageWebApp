@@ -1,10 +1,11 @@
 {
-  "presets": ["@babel/preset-react", "mobx"],
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
+    ["@babel/plugin-syntax-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": false }],
     [
       "import",
       { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }
-    ],
-    ["transform-class-properties", { "spec": false }]
+    ]
   ]
 }
