@@ -1,9 +1,8 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox, Tabs } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 import style from './content.css';
 
@@ -22,29 +21,32 @@ function Content() {
   );
 }
 
+@inject('user')
 @observer
 class NormalLoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   handleSubmit = e => {
     e.preventDefault();
-    const { form } = this.props;
+    const { form, user } = this.props;
     form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-        axios
-          .post('/signin', {
-            name: values.userName,
-            password: values.password,
-          })
-          .then(response => console.log(response))
-          .catch(error => console.log(error));
+        console.log(values);
+        user.fetchUser(values.userName, values.password);
       }
     });
   };
 
   render() {
-    const { form } = this.props;
+    const { form, user } = this.props;
     const { getFieldDecorator } = form;
-    return (
+    // message.error('error');
+    return user.status === 'signin' ? (
+      <Redirect to="/" />
+    ) : (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
           {getFieldDecorator('userName', {
@@ -73,7 +75,7 @@ class NormalLoginForm extends React.Component {
               valuePropName: 'checked',
               initialValue: true,
             })(<Checkbox>记住我</Checkbox>)}
-            <Link to="/signin" className={style.loginFormForgot}>
+            <Link to="/signin" className={style.signinFormForgot}>
               忘记密码?
             </Link>
           </FormItem>
@@ -83,7 +85,7 @@ class NormalLoginForm extends React.Component {
           <Button
             type="primary"
             htmlType="submit"
-            className="login-form-button"
+            className={style.signinFormButton}
           >
             登陆
           </Button>

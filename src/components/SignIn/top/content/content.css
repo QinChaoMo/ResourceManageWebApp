@@ -9,3 +9,7 @@
 .remember a {
   float: right;
 }
+
+.signinFormButton {
+  width: 30%;
+}

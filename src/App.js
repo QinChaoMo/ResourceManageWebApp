@@ -1,12 +1,13 @@
 import React from 'react';
+import { Provider } from 'mobx-react';
 import AppRouter from './router';
+import Stores from './stores/stores';
 import './App.css';
-import mockSignin from '../mock/auth';
 
-if (process.env.NODE_ENV === 'development') {
-  mockSignin();
-}
+const App = () => (
+  <Provider {...Stores}>
+    <AppRouter />
+  </Provider>
+);
 
-export default function App() {
-  return <AppRouter />;
-}
+export default App;

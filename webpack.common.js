@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -19,6 +20,20 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+        /**
+         * babel-loader doesn't load the .babelrc
+         * @todo Remove once the issue is addressed
+         * {@link https://github.com/babel/babel-loader/issues/624}
+         */
+        options: Object.assign(
+          {
+            babelrc: false,
+            cacheDirectory: true,
+          },
+          JSON.parse(
+            fs.readFileSync(path.join(__dirname, '.babelrc'), 'utf-8'),
+          ),
+        ),
       },
       {
         test: /\.css$/,

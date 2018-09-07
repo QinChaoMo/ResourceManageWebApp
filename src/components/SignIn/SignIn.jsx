@@ -1,7 +1,7 @@
 import React from 'react';
 import Top from './top/Top';
 import style from './signin.css';
-import Footer from '../../components/footer/Footer';
+import Footer from '../Footer/Footer';
 
 export default function SignIn() {
   return (
